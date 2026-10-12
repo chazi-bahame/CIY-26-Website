@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Project - CIY-26</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .edit-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+        }
+
+        .edit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #111827;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .update-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .update-btn:hover {
+            background: #1d4ed8;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="edit-container">
+
+    <div class="edit-card">
+
+        <h1>Edit Project</h1>
+
+        <form method="POST">
+
+            <div class="form-group">
+
+                <label for="name">
+                    Project Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ project.name }}"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="category">
+                    Category
+                </label>
+
+                <select
+                    id="category"
+                    name="category"
+                    required>
+
+                    <option value="Automation"
+                        {% if project.category == "Automation" %}selected{% endif %}>
+                        Automation
+                    </option>
+
+                    <option value="Web Development"
+                        {% if project.category == "Web Development" %}selected{% endif %}>
+                        Web Development
+                    </option>
+
+                    <option value="Artificial Intelligence"
+                        {% if project.category == "Artificial Intelligence" %}selected{% endif %}>
+                        Artificial Intelligence
+                    </option>
+
+                    <option value="IoT & Security"
+                        {% if project.category == "IoT & Security" %}selected{% endif %}>
+                        IoT & Security
+                    </option>
+
+                    <option value="Smart Agriculture"
+                        {% if project.category == "Smart Agriculture" %}selected{% endif %}>
+                        Smart Agriculture
+                    </option>
+
+                    <option value="Data Science"
+                        {% if project.category == "Data Science" %}selected{% endif %}>
+                        Data Science
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Project Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    required>{{ project.description }}</textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="image">
+                    Image Filename
+                </label>
+
+                <input
+                    type="text"
+                    id="image"
+                    name="image"
+                    value="{{ project.image }}"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="update-btn">
+
+                Update Project
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

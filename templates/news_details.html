@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ news.title }} | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<section class="single-news">
+
+    <div class="single-news-container">
+
+        {% if news.image %}
+
+        <div class="single-news-image">
+
+            <img
+                src="{{ url_for('static', filename='images/' + news.image) }}"
+                alt="{{ news.title }}"
+            >
+
+        </div>
+
+        {% endif %}
+
+        <div class="single-news-content">
+
+            <span class="single-news-date">
+
+                <i class="fa-regular fa-calendar"></i>
+
+                {{ news.created_at.strftime('%d %B %Y') }}
+
+            </span>
+
+            <h1>
+                {{ news.title }}
+            </h1>
+
+            <div class="single-news-text">
+
+                {{ news.content }}
+
+            </div>
+
+            <a href="{{ url_for('home') }}" class="back-news-btn">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Back to News
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

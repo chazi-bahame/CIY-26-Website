@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ project.name }} | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+
+<body>
+    <a href="{{ url_for('home') }}" class="project-home-btn">
+    <i class="fas fa-globe"></i>
+    Back to Website
+</a>
+    
+
+
+<section class="single-project">
+
+    <div class="single-project-container">
+
+        <!-- PROJECT IMAGE -->
+
+        <div class="single-project-image">
+
+            <img
+                src="{{ url_for('static', filename='images/' + project.image) }}"
+                alt="{{ project.name }}">
+
+        </div>
+
+
+        <!-- PROJECT INFORMATION -->
+
+        <div class="single-project-content">
+
+            <span class="single-project-category">
+                {{ project.category }}
+            </span>
+
+            <h1>
+                {{ project.name }}
+            </h1>
+
+            <p class="single-project-description">
+                {{ project.description }}
+            </p>
+
+
+            <div class="project-info-box">
+
+                <h3>
+                    <i class="fas fa-lightbulb"></i>
+                    About This Project
+                </h3>
+
+                <p>
+                    This project is one of the technology and innovation
+                    initiatives developed by CIY-26. It focuses on applying
+                    practical technology to solve real-world problems and
+                    create useful solutions for the community.
+                </p>
+
+            </div>
+
+
+            <!-- BACK BUTTON -->
+
+            <a href="{{ url_for('home') }}#projects"
+               class="back-project-btn">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Back to all Projects
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

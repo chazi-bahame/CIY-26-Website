@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Announcements | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="member-dashboard">
+
+        <!-- SIDEBAR -->
+
+        <aside class="member-sidebar">
+
+            <div class="member-brand">
+                <i class="fas fa-users"></i>
+                <span>CIY-26</span>
+            </div>
+
+            <nav>
+
+                <a href="{{ url_for('member_dashboard') }}">
+                    <i class="fas fa-gauge-high"></i>
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('member_profile') }}">
+                    <i class="fas fa-user"></i>
+                    My Profile
+                </a>
+
+                <a href="{{ url_for('member_application') }}">
+                    <i class="fas fa-file-lines"></i>
+                    My Application
+                </a>
+
+                <a href="#" class="active">
+                    <i class="fas fa-bullhorn"></i>
+                    Announcements
+                </a>
+
+                <a href="{{ url_for('member_events') }}">
+    <i class="fas fa-calendar"></i>
+    Events
+</a>
+
+                <a href="{{ url_for('member_news') }}">
+    <i class="fas fa-newspaper"></i>
+    News
+</a>
+
+               <a href="{{ url_for('member_projects') }}">
+    <i class="fas fa-lightbulb"></i>
+    Projects
+</a>
+
+                <a href="{{ url_for('home') }}">
+                    <i class="fas fa-globe"></i>
+                    Back to Website
+                </a>
+
+            </nav>
+
+            <a href="{{ url_for('member_logout') }}"
+               class="member-logout">
+
+                <i class="fas fa-right-from-bracket"></i>
+                Logout
+
+            </a>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="member-main">
+
+            <div class="member-topbar">
+
+                <div>
+
+                    <h1>Announcements</h1>
+
+                    <p>
+                        Stay updated with important CIY-26 announcements.
+                    </p>
+
+                </div>
+
+                <div class="member-user-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+
+            </div>
+
+
+            <!-- ANNOUNCEMENTS -->
+
+            <div class="member-announcements">
+
+                {% for announcement in announcements %}
+
+                <div class="member-announcement-card">
+
+                    <div class="announcement-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+
+                    <div class="announcement-content">
+
+                        <div class="announcement-date">
+
+                            <i class="fas fa-calendar"></i>
+
+                            {{ announcement.created_at.strftime('%d %B %Y') }}
+
+                        </div>
+
+                        <h2>
+                            {{ announcement.title }}
+                        </h2>
+
+                        <p>
+                            {{ announcement.content }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% else %}
+
+                <div class="no-announcements">
+
+                    <i class="fas fa-bullhorn"></i>
+
+                    <h2>No Announcements Yet</h2>
+
+                    <p>
+                        There are currently no announcements
+                        available for CIY-26 members.
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

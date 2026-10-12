@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projects | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="member-dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="member-sidebar">
+
+        <div class="member-brand">
+            <i class="fas fa-users"></i>
+            <span>CIY-26</span>
+        </div>
+
+        <nav>
+
+            <a href="{{ url_for('member_dashboard') }}">
+                <i class="fas fa-gauge-high"></i>
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('member_profile') }}">
+                <i class="fas fa-user"></i>
+                My Profile
+            </a>
+
+            <a href="{{ url_for('member_application') }}">
+                <i class="fas fa-file-lines"></i>
+                My Application
+            </a>
+
+            <a href="{{ url_for('member_announcements') }}">
+                <i class="fas fa-bullhorn"></i>
+                Announcements
+            </a>
+
+            <a href="{{ url_for('member_events') }}">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+
+            <a href="{{ url_for('member_news') }}">
+                <i class="fas fa-newspaper"></i>
+                News
+            </a>
+
+            <a href="#" class="active">
+                <i class="fas fa-lightbulb"></i>
+                Projects
+            </a>
+
+            <a href="{{ url_for('home') }}">
+                <i class="fas fa-globe"></i>
+                Back to Website
+            </a>
+
+        </nav>
+
+        <a href="{{ url_for('member_logout') }}"
+           class="member-logout">
+
+            <i class="fas fa-right-from-bracket"></i>
+            Logout
+
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="member-main">
+
+        <div class="member-topbar">
+
+            <div>
+
+                <h1>Projects</h1>
+
+                <p>
+                    Explore the projects and innovations developed by CIY-26.
+                </p>
+
+            </div>
+
+            <div class="member-user-icon">
+
+                <i class="fas fa-lightbulb"></i>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROJECTS -->
+
+        <div class="member-projects">
+
+            {% for project in projects %}
+
+            <div class="member-project-card">
+
+                {% if project.image %}
+
+                <div class="member-project-image">
+
+                    <img src="{{ url_for('static', filename='images/' + project.image) }}"
+                         alt="{{ project.name }}">
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="member-project-content">
+
+                    <span class="member-project-category">
+                        {{ project.category }}
+                    </span>
+
+                    <h2>
+                        {{ project.name }}
+                    </h2>
+
+                    <p>
+                        {{ project.description }}
+                    </p>
+
+                    <a href="{{ url_for('project_details', project_id=project.id) }}"
+                       class="member-project-button">
+
+                        View Project
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="no-member-projects">
+
+                <i class="fas fa-lightbulb"></i>
+
+                <h2>No Projects Yet</h2>
+
+                <p>
+                    There are currently no projects available for CIY-26 members.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

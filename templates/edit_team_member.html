@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Team Member - CIY-26</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .edit-container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .edit-container h1 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        .form-group textarea {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+        .current-image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .save-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .save-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 12px 22px;
+            background: #6b7280;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="edit-container">
+
+    <h1>
+
+        <i class="fas fa-user-edit"></i>
+
+        Edit Team Member
+
+    </h1>
+
+
+    <form method="POST"
+          enctype="multipart/form-data">
+
+
+        <div class="form-group">
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ member.name }}"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="position">
+                Position
+            </label>
+
+            <input
+                type="text"
+                id="position"
+                name="position"
+                value="{{ member.position }}"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                name="description"
+                required>{{ member.description }}</textarea>
+
+        </div>
+
+
+        {% if member.image %}
+
+        <div class="form-group">
+
+            <label>
+                Current Photo
+            </label>
+
+            <img
+                src="{{ url_for('static', filename='images/' + member.image) }}"
+                alt="{{ member.name }}"
+                class="current-image">
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="form-group">
+
+            <label for="image">
+                Change Photo
+            </label>
+
+            <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*">
+
+        </div>
+
+
+        <button type="submit"
+                class="save-btn">
+
+            <i class="fas fa-save"></i>
+
+            Save Changes
+
+        </button>
+
+
+        <a href="/admin"
+           class="back-btn">
+
+            <i class="fas fa-arrow-left"></i>
+
+            Back to Admin
+
+        </a>
+
+
+    </form>
+
+</div>
+
+
+</body>
+
+</html>

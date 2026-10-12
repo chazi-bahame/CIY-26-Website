@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Application | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="member-dashboard">
+
+        <!-- SIDEBAR -->
+
+        <aside class="member-sidebar">
+
+            <div class="member-brand">
+                <i class="fas fa-users"></i>
+                <span>CIY-26</span>
+            </div>
+
+            <nav>
+
+    <a href="{{ url_for('member_dashboard') }}">
+        <i class="fas fa-gauge-high"></i>
+        Dashboard
+    </a>
+
+    <a href="{{ url_for('member_profile') }}">
+        <i class="fas fa-user"></i>
+        My Profile
+    </a>
+
+    <a href="#" class="active">
+        <i class="fas fa-file-lines"></i>
+        My Application
+    </a>
+
+    <a href="{{ url_for('member_announcements') }}">
+        <i class="fas fa-bullhorn"></i>
+        Announcements
+    </a>
+
+    <a href="{{ url_for('member_events') }}">
+        <i class="fas fa-calendar"></i>
+        Events
+    </a>
+
+    <a href="{{ url_for('member_news') }}">
+        <i class="fas fa-newspaper"></i>
+        News
+    </a>
+
+    <a href="{{ url_for('member_projects') }}">
+        <i class="fas fa-lightbulb"></i>
+        Projects
+    </a>
+
+    <a href="{{ url_for('home') }}">
+        <i class="fas fa-globe"></i>
+        Back to Website
+    </a>
+
+</nav>
+
+            <a href="/member/logout" class="member-logout">
+                <i class="fas fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="member-main">
+
+            <div class="member-topbar">
+
+                <div>
+
+                    <h1>My Application</h1>
+
+                    <p>
+                        View your CIY-26 membership application details.
+                    </p>
+
+                </div>
+
+                <div class="member-user-icon">
+                    <i class="fas fa-file-lines"></i>
+                </div>
+
+            </div>
+
+
+            <!-- APPLICATION CARD -->
+
+            <div class="application-card">
+
+                <div class="application-header">
+
+                    <div>
+
+                        <span>MEMBERSHIP APPLICATION</span>
+
+                        <h2>
+                            {{ application.name }}
+                        </h2>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    {% if application.status == "Accepted" %}
+
+                    <span class="application-status accepted">
+                        <i class="fas fa-circle-check"></i>
+                        Accepted
+                    </span>
+
+                    {% elif application.status == "Rejected" %}
+
+                    <span class="application-status rejected">
+                        <i class="fas fa-circle-xmark"></i>
+                        Rejected
+                    </span>
+
+                    {% else %}
+
+                    <span class="application-status pending">
+                        <i class="fas fa-clock"></i>
+                        Pending
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="application-information">
+
+                    <div class="application-item">
+
+                        <i class="fas fa-envelope"></i>
+
+                        <div>
+
+                            <span>Email Address</span>
+
+                            <strong>
+                                {{ application.email }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="application-item">
+
+                        <i class="fas fa-phone"></i>
+
+                        <div>
+
+                            <span>Phone Number</span>
+
+                            <strong>
+                                {{ application.phone }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="application-item">
+
+                        <i class="fas fa-lightbulb"></i>
+
+                        <div>
+
+                            <span>Area of Interest</span>
+
+                            <strong>
+                                {{ application.skill }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="application-item">
+
+                        <i class="fas fa-calendar"></i>
+
+                        <div>
+
+                            <span>Application Date</span>
+
+                            <strong>
+                                {{ application.created_at.strftime('%d %B %Y, %I:%M %p') }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="application-item application-full">
+
+                        <i class="fas fa-comment"></i>
+
+                        <div>
+
+                            <span>Why I Want To Join CIY-26</span>
+
+                            <strong>
+                                {{ application.message }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATUS MESSAGE -->
+
+                {% if application.status == "Accepted" %}
+
+                <div class="application-message accepted-message">
+
+                    <i class="fas fa-circle-check"></i>
+
+                    <div>
+
+                        <strong>Application Accepted</strong>
+
+                        <p>
+                            Congratulations! Your CIY-26 membership
+                            application has been accepted.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% elif application.status == "Rejected" %}
+
+                <div class="application-message rejected-message">
+
+                    <i class="fas fa-circle-xmark"></i>
+
+                    <div>
+
+                        <strong>Application Rejected</strong>
+
+                        <p>
+                            Your application was not accepted at this time.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% else %}
+
+                <div class="application-message pending-message">
+
+                    <i class="fas fa-clock"></i>
+
+                    <div>
+
+                        <strong>Application Under Review</strong>
+
+                        <p>
+                            Your application is currently being reviewed
+                            by the CIY-26 team.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- BACK BUTTON -->
+
+                <div class="application-actions">
+
+                    <a href="{{ url_for('member_dashboard') }}"
+                       class="profile-back-button">
+
+                        <i class="fas fa-arrow-left"></i>
+
+                        Back to Dashboard
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

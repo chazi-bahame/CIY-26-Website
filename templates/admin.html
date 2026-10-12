@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CIY-26 Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .admin-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+        }
+
+        .admin-header {
+            background: #111827;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .admin-header h1 {
+            margin: 0 0 8px;
+        }
+
+        .admin-header p {
+            margin: 0;
+            color: #d1d5db;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .admin-card h2 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .add-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .add-btn:hover {
+            background: #1d4ed8;
+        }
+        .dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.dashboard-stat {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-stat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 768px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gallery-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 20px;
+}
+
+.gallery-admin-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.gallery-admin-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.gallery-admin-card h3 {
+    margin: 12px 0 6px;
+}
+
+.gallery-admin-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .gallery-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.gallery-admin-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+.gallery-admin-card {
+    background: white;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.announcements-section {
+    padding: 80px 8%;
+    background: #f8fafc;
+}
+
+.announcements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.announcement-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.announcement-card:hover {
+    transform: translateY(-6px);
+}
+
+.announcement-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.announcement-content {
+    padding: 22px;
+}
+
+.announcement-date {
+    font-size: 13px;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.announcement-content h3 {
+    margin: 12px 0;
+    font-size: 20px;
+}
+
+.announcement-content p {
+    color: #666;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+
+    .announcements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .announcement-image img {
+        height: 200px;
+    }
+
+}
+
+.announcement-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+.announcement-admin-card {
+    background: white;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.announcement-admin-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+.news-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.news-admin-card {
+    background: white;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.news-admin-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+.news-admin-card h3 {
+    font-size: 15px;
+    margin: 10px 0 5px;
+}
+
+.news-admin-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666;
+}
+
+@media (max-width: 1200px) {
+    .news-admin-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .news-admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .news-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1200px) {
+    .announcement-admin-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .announcement-admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .announcement-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1200px) {
+    .gallery-admin-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.team-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.team-admin-card {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.team-admin-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.team-admin-card h3 {
+    margin: 8px 0 5px;
+    font-size: 16px;
+}
+
+.team-admin-card strong {
+    color: #2563eb;
+    font-size: 13px;
+}
+
+.team-admin-card p {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@media (max-width: 1200px) {
+    .team-admin-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .team-admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .team-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+    </style>
+
+<style>
+
+/* ================= EVENTS ADMIN ================= */
+
+.events-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.events-admin-card {
+    background: white;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.events-admin-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+.events-admin-card h3 {
+    font-size: 15px;
+    margin: 10px 0 5px;
+}
+
+.events-admin-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.events-admin-card small {
+    font-size: 12px;
+    color: #2563eb;
+}
+
+/* TABLET */
+
+@media (max-width: 1200px) {
+
+    .events-admin-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .events-admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .events-admin-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+.back-to-website {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: 0.3s ease;
+}
+
+.back-to-website:hover {
+    background: #1d4ed8;
+    transform: translateX(-3px);
+}
+.back-to-website {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: 0.3s ease;
+    float: right;
+}
+@media (max-width: 600px) {
+    .back-to-website {
+        float: none;
+        margin-bottom: 15px;
+    }
+}
+.back-to-website {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.back-to-website:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(37, 99, 235, 0.35);
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <a href="{{ url_for('home') }}" class="back-to-website">
+    <i class="fas fa-globe"></i>
+    Back to Website
+</a>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+
+    <h1 style="margin: 0;">
+        <i class="fas fa-gauge-high"></i>
+        Admin Dashboard
+    </h1>
+
+    
+
+    <a href="/admin/logout"
+       style="
+           background: #dc2626;
+           color: white;
+           padding: 10px 18px;
+           border-radius: 7px;
+           text-decoration: none;
+           font-weight: bold;
+       ">
+        <i class="fas fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+   
+
+
+<div class="admin-container">
+
+    <div class="admin-header">
+        <h1>CIY-26 Admin Panel</h1>
+        <p>Manage CIY-26 projects and innovation activities.</p>
+    </div>
+
+
+    <div class="dashboard-stats">
+
+
+        <!-- Total Projects -->
+
+        <div class="admin-card dashboard-stat">
+
+            <h2>
+    <i class="fas fa-folder-open"></i>
+    Total Projects
+</h2>
+
+            <p style="
+                font-size: 40px;
+                font-weight: bold;
+                color: #2563eb;
+                margin: 10px 0;
+            ">
+                {{ projects|length }}
+            </p>
+
+        </div>
+
+
+        <!-- Total Categories -->
+
+        <div class="admin-card dashboard-stat">
+
+           <h2>
+    <i class="fas fa-tags"></i>
+    Total Categories
+</h2>
+
+            <p style="
+                font-size: 40px;
+                font-weight: bold;
+                color: #16a34a;
+                margin: 10px 0;
+            ">
+                {{ categories|length }}
+            </p>
+
+        </div>
+
+
+        <!-- Latest Project -->
+
+        <div class="admin-card dashboard-stat">
+
+          <h2>
+    <i class="fas fa-clock"></i>
+    Latest Project
+</h2>
+
+            {% if latest_project %}
+
+                <p style="
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #7c3aed;
+                    margin: 10px 0;
+                ">
+                    {{ latest_project.name }}
+                </p>
+
+            {% else %}
+
+                <p>No projects available.</p>
+
+            {% endif %}
+
+        </div>
+        <div class="dashboard-stat">
+
+    <h2>
+        <i class="fas fa-envelope"></i>
+        Total Messages
+    </h2>
+
+    <p>
+        {{ total_messages }}
+    </p>
+
+</div>
+<div class="dashboard-stat">
+    <i class="fas fa-envelope-open-text"></i>
+
+    <div>
+        <h3>{{ unread_messages }}</h3>
+        <p>Unread Messages</p>
+    </div>
+</div>
+
+
+    </div>
+
+    <div class="admin-card">
+
+        <h2>Add New Project</h2>
+
+       <form method="POST"
+      action="/admin/add-project"
+      enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="name">Project Name</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter project name">
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category</label>
+
+        <select id="category" name="category">
+            <option value="">Select category</option>
+            <option>Automation</option>
+            <option>Web Development</option>
+            <option>Artificial Intelligence</option>
+            <option>IoT & Security</option>
+            <option>Smart Agriculture</option>
+            <option>Data Science</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Project Description</label>
+
+        <textarea
+            id="description"
+            name="description"
+            placeholder="Enter project description"></textarea>
+    </div>
+
+    <div class="form-group">
+    <label for="image">Project Image</label>
+
+    <input
+        type="file"
+        id="image"
+        name="image"
+        accept="image/*">
+</div>
+
+    <button type="submit" class="add-btn">
+        Add Project
+    </button>
+
+</form>
+
+ <div class="admin-card">
+
+        <h2>Add New Project</h2>
+
+       <form method="POST"
+      action="/admin/add-project"
+      enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="name">Project Name</label>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter project name">
+    </div>
+
+<div class="admin-card" style="margin-top: 25px;">
+
+    <h2>Existing Projects</h2>
+
+    {% for project in projects %}
+    
+    <div style="
+        border: 1px solid #e5e7eb;
+        padding: 18px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        background: #f9fafb;
+    ">
+
+        <h3 style="margin: 0 0 8px;">
+            {{ project.name }}
+        </h3>
+
+        <p style="margin: 5px 0;">
+            <strong>Category:</strong> {{ project.category }}
+        </p>
+
+        <p style="margin: 5px 0;">
+            {{ project.description }}
+        </p>
+
+        <form method="POST"
+      action="/admin/delete-project/{{ project.id }}"
+      style="margin-top: 15px;"
+      onsubmit="return confirm('Are you sure you want to delete this project?');">
+
+    
+
+    <button type="submit"
+            style="
+                background: #dc2626;
+                color: white;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 7px;
+                cursor: pointer;
+            ">
+        Delete
+    </button>
+
+</form>
+
+
+
+<a href="/admin/edit-project/{{ project.id }}"
+   style="
+       display: inline-block;
+       margin-top: 10px;
+       background: #2563eb;
+       color: white;
+       text-decoration: none;
+       padding: 10px 18px;
+       border-radius: 7px;
+   ">
+    Edit
+</a>
+
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<h2>
+    <i class="fas fa-images"></i>
+    Add Gallery Image
+</h2>
+
+<form method="POST"
+      action="/admin/add-gallery"
+      enctype="multipart/form-data">
+
+    <div class="form-group">
+
+        <label for="gallery-title">
+            Image Title
+        </label>
+
+        <input
+            type="text"
+            id="gallery-title"
+            name="title"
+            placeholder="Enter image title"
+            required>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="gallery-description">
+            Description
+        </label>
+
+        <textarea
+            id="gallery-description"
+            name="description"
+            placeholder="Enter image description"></textarea>
+
+    </div>
+
+    
+
+    <div class="form-group">
+
+        <label for="gallery-image">
+            Select Image
+        </label>
+
+        <input
+            type="file"
+            id="gallery-image"
+            name="image"
+            accept="image/*"
+            required>
+
+    </div>
+
+
+    <button type="submit" class="add-btn">
+
+        <i class="fas fa-upload"></i>
+        Upload to Gallery
+
+    </button>
+
+</form>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-photo-film"></i>
+        Gallery Images
+    </h2>
+
+    <div class="gallery-admin-grid">
+
+        {% for item in gallery %}
+
+        <div class="gallery-admin-card">
+
+            <img
+                src="{{ url_for('static', filename='images/' + item.image) }}"
+                alt="{{ item.title }}"
+            >
+
+            <h3>{{ item.title }}</h3>
+
+            <p>{{ item.description }}</p>
+
+            <form
+                method="POST"
+                action="/admin/delete-gallery/{{ item.id }}"
+                onsubmit="return confirm('Are you sure you want to delete this image?');"
+            >
+
+                <button
+                    type="submit"
+                    style="
+                        background: #dc2626;
+                        color: white;
+                        border: none;
+                        padding: 10px 18px;
+                        border-radius: 7px;
+                        cursor: pointer;
+                        font-weight: bold;
+                    "
+                >
+
+                    <i class="fas fa-trash"></i>
+                    Delete
+
+                </button>
+
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <p>No gallery images uploaded yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-bullhorn"></i>
+        Post Announcement
+    </h2>
+
+    <form method="POST"
+          action="/admin/add-announcement"
+          enctype="multipart/form-data">
+
+        <div class="form-group">
+
+            <label for="announcement-title">
+                Announcement Title
+            </label>
+
+            <input
+                type="text"
+                id="announcement-title"
+                name="title"
+                placeholder="Enter announcement title"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="announcement-content">
+                Announcement Content
+            </label>
+
+            <textarea
+                id="announcement-content"
+                name="content"
+                rows="6"
+                placeholder="Write your announcement here..."
+                required></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="announcement-image">
+                Announcement Image
+            </label>
+
+            <input
+                type="file"
+                id="announcement-image"
+                name="image"
+                accept="image/*">
+
+        </div>
+
+        <button type="submit" class="add-btn">
+
+            <i class="fas fa-paper-plane"></i>
+            Post Announcement
+
+        </button>
+
+    </form>
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-bullhorn"></i>
+        Posted Announcements
+    </h2>
+
+    <div class="announcement-admin-grid">
+
+        {% for announcement in announcements %}
+
+        <div class="announcement-admin-card">
+
+            {% if announcement.image %}
+
+            <img
+                src="{{ url_for('static', filename='images/' + announcement.image) }}"
+                alt="{{ announcement.title }}"
+            >
+
+            {% endif %}
+
+            <h3>
+                {{ announcement.title }}
+            </h3>
+
+            <p>
+                {{ announcement.content }}
+            </p>
+
+            <small>
+                {{ announcement.created_at.strftime('%d %B %Y, %I:%M %p') }}
+            </small>
+
+            <br><br>
+
+            <form
+                method="POST"
+                action="/admin/delete-announcement/{{ announcement.id }}"
+                onsubmit="return confirm('Are you sure you want to delete this announcement?');"
+            >
+
+            <a
+    href="/admin/edit-announcement/{{ announcement.id }}"
+    style="
+        display: inline-block;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 7px;
+        margin-right: 8px;
+        font-weight: bold;
+    "
+>
+    <i class="fas fa-edit"></i>
+    Edit
+</a>
+
+                <button
+                    type="submit"
+                    style="
+                        background: #dc2626;
+                        color: white;
+                        border: none;
+                        padding: 10px 18px;
+                        border-radius: 7px;
+                        cursor: pointer;
+                        font-weight: bold;
+                    "
+                >
+
+                    <i class="fas fa-trash"></i>
+                    Delete
+
+                </button>
+
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <p>No announcements posted yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-users"></i>
+        Add Team Member
+    </h2>
+
+    <form method="POST"
+          action="/admin/add-team-member"
+          enctype="multipart/form-data">
+
+        <div class="form-group">
+
+            <label for="team-name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="team-name"
+                name="name"
+                placeholder="Enter member full name"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="team-position">
+                Position
+            </label>
+
+            <input
+                type="text"
+                id="team-position"
+                name="position"
+                placeholder="e.g. Chairperson, Secretary"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="team-description">
+                Description
+            </label>
+
+            <textarea
+                id="team-description"
+                name="description"
+                rows="5"
+                placeholder="Enter member description"></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="team-image">
+                Member Photo
+            </label>
+
+            <input
+                type="file"
+                id="team-image"
+                name="image"
+                accept="image/*">
+
+        </div>
+
+        <button type="submit" class="add-btn">
+
+            <i class="fas fa-user-plus"></i>
+            Add Team Member
+
+        </button>
+
+    </form>
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-users"></i>
+        Team Members
+    </h2>
+
+    <div class="team-admin-grid">
+
+        {% for member in team_members %}
+
+        <div class="team-admin-card">
+
+            {% if member.image %}
+
+            <img
+                src="{{ url_for('static', filename='images/' + member.image) }}"
+                alt="{{ member.name }}"
+            >
+
+            {% endif %}
+
+            <h3>{{ member.name }}</h3>
+
+            <strong>{{ member.position }}</strong>
+
+            <p>
+                {{ member.description }}
+            </p>
+
+            <div style="margin-top: 15px;">
+
+    <a
+        href="/admin/edit-team-member/{{ member.id }}"
+        style="
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 9px 14px;
+            border-radius: 7px;
+            margin-right: 5px;
+            font-weight: bold;
+        "
+    >
+        <i class="fas fa-edit"></i>
+        Edit
+    </a>
+
+
+    <form
+        method="POST"
+        action="/admin/delete-team-member/{{ member.id }}"
+        style="display: inline-block;"
+        onsubmit="return confirm('Are you sure you want to delete this team member?');"
+    >
+
+        <button
+            type="submit"
+            style="
+                background: #dc2626;
+                color: white;
+                border: none;
+                padding: 9px 14px;
+                border-radius: 7px;
+                cursor: pointer;
+                font-weight: bold;
+            "
+        >
+            <i class="fas fa-trash"></i>
+            Delete
+        </button>
+
+    </form>
+
+</div>
+
+        </div>
+
+        {% else %}
+
+        <p>No team members added yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-newspaper"></i>
+        Post News
+    </h2>
+
+    <form method="POST"
+          action="/admin/add-news"
+          enctype="multipart/form-data">
+
+        <div class="form-group">
+
+            <label for="news-title">
+                News Title
+            </label>
+
+            <input
+                type="text"
+                id="news-title"
+                name="title"
+                placeholder="Enter news title"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="news-content">
+                News Content
+            </label>
+
+            <textarea
+                id="news-content"
+                name="content"
+                rows="7"
+                placeholder="Write your news here..."
+                required></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="news-image">
+                News Image
+            </label>
+
+            <input
+                type="file"
+                id="news-image"
+                name="image"
+                accept="image/*">
+
+        </div>
+
+
+        <button type="submit" class="add-btn">
+
+            <i class="fas fa-paper-plane"></i>
+            Publish News
+
+        </button>
+
+    </form>
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-newspaper"></i>
+        Published News
+    </h2>
+
+    <div class="news-admin-grid">
+
+        {% for item in news %}
+
+        <div class="news-admin-card">
+
+            {% if item.image %}
+
+            <img
+                src="{{ url_for('static', filename='images/' + item.image) }}"
+                alt="{{ item.title }}"
+            >
+
+            {% endif %}
+
+            <h3>
+                {{ item.title }}
+            </h3>
+
+            <p>
+                {{ item.content }}
+            </p>
+
+            <small>
+                {{ item.created_at.strftime('%d %B %Y, %I:%M %p') }}
+            </small>
+
+            <div style="margin-top: 15px;">
+
+    <a
+        href="/admin/edit-news/{{ item.id }}"
+        style="
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 9px 14px;
+            border-radius: 7px;
+            margin-right: 5px;
+            font-weight: bold;
+        "
+    >
+        <i class="fas fa-edit"></i>
+        Edit
+    </a>
+
+
+    <form
+        method="POST"
+        action="/admin/delete-news/{{ item.id }}"
+        style="display: inline-block;"
+        onsubmit="return confirm('Are you sure you want to delete this news?');"
+    >
+
+        <button
+            type="submit"
+            style="
+                background: #dc2626;
+                color: white;
+                border: none;
+                padding: 9px 14px;
+                border-radius: 7px;
+                cursor: pointer;
+                font-weight: bold;
+            "
+        >
+            <i class="fas fa-trash"></i>
+            Delete
+        </button>
+
+    </form>
+
+</div>
+
+
+        </div>
+
+        {% else %}
+
+        <p>No news published yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<div style="margin-top: 20px;">
+
+    <form method="POST"
+          action="/admin/delete-gallery/ID_HAPA">
+
+        <button type="submit"
+                style="
+                    background: #dc2626;
+                    color: white;
+                    border: none;
+                    padding: 10px 18px;
+                    border-radius: 7px;
+                    cursor: pointer;
+                ">
+
+            <i class="fas fa-trash"></i>
+            Delete Gallery Image
+
+        </button>
+
+    </form>
+
+</div>
+
+<div class="admin-card" style="margin-top: 25px;">
+
+    <h2>
+        <i class="fas fa-envelope"></i>
+        Contact Messages
+    </h2>
+
+    {% for msg in messages %}
+
+    <div style="
+        border: 1px solid #e5e7eb;
+        padding: 18px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        background: #f9fafb;
+    ">
+
+        <h3 style="margin: 0 0 8px;">
+            {{ msg.subject }}
+        </h3>
+        {% if msg.is_read == 0 %}
+    <span style="
+        display: inline-block;
+        background: #dc2626;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-bottom: 10px;
+    ">
+        NEW
+    </span>
+{% else %}
+    <span style="
+        display: inline-block;
+        background: #16a34a;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-bottom: 10px;
+    ">
+        READ
+    </span>
+{% endif %}
+
+        <p style="margin: 5px 0;">
+            <strong>Name:</strong> {{ msg.name }}
+        </p>
+
+        <p style="margin: 5px 0;">
+            <strong>Email:</strong> {{ msg.email }}
+        </p>
+
+        <p style="margin: 10px 0 0;">
+            <strong>Message:</strong><br>
+            {{ msg.message }}
+        </p>
+        <p style="margin: 10px 0;">
+    <strong>
+        <i class="fas fa-calendar-alt"></i>
+        Received:
+    </strong>
+    {{ msg.created_at.strftime('%d %B %Y, %I:%M %p') }}
+</p>
+        <form method="POST"
+      action="/admin/delete-message/{{ msg.id }}"
+      style="margin-top: 15px;"
+      onsubmit="return confirm('Are you sure you want to delete this message?');">
+
+       <a href="/admin/view-message/{{ msg.id }}"
+   style="
+       display: inline-block;
+       background: #2563eb;
+       color: white;
+       text-decoration: none;
+       padding: 10px 18px;
+       border-radius: 7px;
+       margin-right: 8px;
+   ">
+    <i class="fas fa-eye"></i>
+    View
+</a>
+
+    <button type="submit"
+            style="
+                background: #dc2626;
+                color: white;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 7px;
+                cursor: pointer;
+            ">
+        <i class="fas fa-trash"></i>
+        Delete
+    </button>
+     </form>
+       {% if msg.is_read == 0 %}
+
+        <form method="POST"
+              action="/admin/mark-message-read/{{ msg.id }}"
+              style="margin-top: 15px;">
+
+            <button type="submit"
+                    style="
+                        background: #16a34a;
+                        color: white;
+                        border: none;
+                        padding: 10px 18px;
+                        border-radius: 7px;
+                        cursor: pointer;
+                    ">
+                <i class="fas fa-check"></i>
+                Mark as Read
+            </button>
+
+        </form>
+
+        {% endif %}
+ 
+    </div>
+
+    {% else %}
+
+    <p>No contact messages yet.</p>
+
+    {% endfor %}
+
+    
+
+</div>
+
+<!-- ================= JOIN APPLICATIONS ================= -->
+
+<div class="admin-card" style="margin-top: 25px;">
+
+    <h2>
+        <i class="fas fa-user-plus"></i>
+        Join Applications
+    </h2>
+
+    {% for applicant in join_applications %}
+
+    <div style="
+        border: 1px solid #e5e7eb;
+        padding: 18px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        background: #f9fafb;
+    ">
+
+        <h3 style="margin: 0 0 10px;">
+            {{ applicant.name }}
+        </h3>
+
+
+        <!-- STATUS -->
+
+        {% if applicant.status == "Accepted" %}
+
+        <span style="
+            display: inline-block;
+            background: #16a34a;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        ">
+            Accepted
+        </span>
+
+        {% elif applicant.status == "Rejected" %}
+
+        <span style="
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        ">
+            Rejected
+        </span>
+
+        {% else %}
+
+        <span style="
+            display: inline-block;
+            background: #f59e0b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        ">
+            Pending
+        </span>
+
+        {% endif %}
+
+
+        <!-- EMAIL -->
+
+        <p style="margin: 5px 0;">
+            <strong>Email:</strong>
+            {{ applicant.email }}
+        </p>
+
+
+        <!-- PHONE -->
+
+        <p style="margin: 5px 0;">
+            <strong>Phone:</strong>
+            {{ applicant.phone }}
+        </p>
+
+
+        <!-- SKILL -->
+
+        <p style="margin: 5px 0;">
+            <strong>Area of Interest:</strong>
+            {{ applicant.skill }}
+        </p>
+
+
+        <!-- MESSAGE -->
+
+        <p style="margin: 10px 0 0;">
+            <strong>Why they want to join:</strong><br>
+            {{ applicant.message }}
+        </p>
+
+
+        <!-- DATE -->
+
+        <p style="margin: 10px 0;">
+            <strong>
+                <i class="fas fa-calendar-alt"></i>
+                Applied:
+            </strong>
+
+            {{ applicant.created_at.strftime('%d %B %Y, %I:%M %p') }}
+        </p>
+
+
+        <!-- ACCEPT BUTTON -->
+
+        {% if applicant.status != "Accepted" %}
+
+        <form method="POST"
+              action="{{ url_for('accept_join_application', application_id=applicant.id) }}"
+              style="display: inline-block; margin-top: 15px;">
+
+            <button type="submit"
+                    style="
+                        background: #16a34a;
+                        color: white;
+                        border: none;
+                        padding: 10px 18px;
+                        border-radius: 7px;
+                        cursor: pointer;
+                        font-weight: 600;
+                    ">
+
+                <i class="fas fa-check"></i>
+                Accept Application
+
+            </button>
+
+        </form>
+
+        {% endif %}
+
+        <!-- REJECT BUTTON -->
+
+{% if applicant.status != "Rejected" %}
+
+<form method="POST"
+      action="{{ url_for('reject_join_application', application_id=applicant.id) }}"
+      style="display: inline-block; margin-top: 15px; margin-left: 8px;"
+      onsubmit="return confirm('Are you sure you want to reject this application?');">
+
+    <button type="submit"
+            style="
+                background: #dc2626;
+                color: white;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 7px;
+                cursor: pointer;
+                font-weight: 600;
+            ">
+
+        <i class="fas fa-times"></i>
+        Reject Application
+
+    </button>
+
+</form>
+
+{% endif %}
+
+
+        <!-- DELETE BUTTON -->
+
+        <form method="POST"
+              action="{{ url_for('delete_join_application', application_id=applicant.id) }}"
+              style="
+                  display: inline-block;
+                  margin-top: 15px;
+                  margin-left: 8px;
+              "
+              onsubmit="return confirm('Are you sure you want to delete this application?');">
+
+            <button type="submit"
+                    style="
+                        background: #dc2626;
+                        color: white;
+                        border: none;
+                        padding: 10px 18px;
+                        border-radius: 7px;
+                        cursor: pointer;
+                        font-weight: 600;
+                    ">
+
+                <i class="fas fa-trash"></i>
+                Delete Application
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% else %}
+
+    <p>No join applications yet.</p>
+
+    {% endfor %}
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-calendar-alt"></i>
+        Add Event
+    </h2>
+
+    <form method="POST"
+          action="/admin/add-event"
+          enctype="multipart/form-data">
+
+        <div class="form-group">
+
+            <label for="event-title">
+                Event Title
+            </label>
+
+            <input
+                type="text"
+                id="event-title"
+                name="title"
+                placeholder="Enter event title"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="event-description">
+                Event Description
+            </label>
+
+            <textarea
+                id="event-description"
+                name="description"
+                rows="6"
+                placeholder="Describe the event..."
+                required></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="event-date">
+                Event Date
+            </label>
+
+            <input
+                type="datetime-local"
+                id="event-date"
+                name="event_date"
+                required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="event-image">
+                Event Image
+            </label>
+
+            <input
+                type="file"
+                id="event-image"
+                name="image"
+                accept="image/*">
+
+        </div>
+
+        <button type="submit" class="add-btn">
+
+            <i class="fas fa-calendar-plus"></i>
+            Add Event
+
+        </button>
+
+    </form>
+
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div class="admin-card">
+
+    <h2>
+        <i class="fas fa-calendar-check"></i>
+        Published Events
+    </h2>
+
+    <div class="events-admin-grid">
+
+        {% for event in events %}
+
+        <div class="events-admin-card">
+
+            {% if event.image %}
+
+            <img
+                src="{{ url_for('static', filename='images/' + event.image) }}"
+                alt="{{ event.title }}"
+            >
+
+            {% endif %}
+
+            <h3>
+                {{ event.title }}
+            </h3>
+
+            <p>
+                {{ event.description }}
+            </p>
+
+            <small>
+
+                <i class="fa-regular fa-calendar"></i>
+
+                {{ event.event_date.strftime('%d %B %Y, %I:%M %p') }}
+
+            </small>
+
+            <div style="margin-top: 15px;">
+
+                <button
+                    type="button"
+                    style="
+                        background: #2563eb;
+                        color: white;
+                        border: none;
+                        padding: 9px 14px;
+                        border-radius: 7px;
+                        cursor: pointer;
+                        font-weight: bold;
+                    "
+                >
+
+                    <i class="fas fa-edit"></i>
+                    Edit
+
+                </button>
+
+               <form
+    method="POST"
+    action="/admin/delete-event/{{ event.id }}"
+    style="display: inline-block;"
+    onsubmit="return confirm('Are you sure you want to delete this event?');"
+>
+
+    <button
+        type="submit"
+        style="
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        "
+    >
+        <i class="fas fa-trash"></i>
+        Delete
+    </button>
+
+</form>
+
+
+        </div>
+
+
+        {% else %}
+
+        <p>
+            No events published yet.
+        </p>
+
+        {% endfor %}
+
+</div>
+    
+
+
+
+</body>
+</html>

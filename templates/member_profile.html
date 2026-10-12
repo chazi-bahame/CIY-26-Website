@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="member-dashboard">
+
+        <!-- SIDEBAR -->
+
+        <aside class="member-sidebar">
+
+            <div class="member-brand">
+                <i class="fas fa-users"></i>
+                <span>CIY-26</span>
+            </div>
+
+            <nav>
+
+                <a href="{{ url_for('member_dashboard') }}">
+                    <i class="fas fa-gauge-high"></i>
+                    Dashboard
+                </a>
+
+                <a href="#" class="active">
+                    <i class="fas fa-user"></i>
+                    My Profile
+                </a>
+
+                <a href="{{ url_for('member_application') }}">
+    <i class="fas fa-file-lines"></i>
+    My Application
+</a>
+
+                <a href="{{ url_for('member_announcements') }}">
+    <i class="fas fa-bullhorn"></i>
+    Announcements
+</a>
+
+                <a href="{{ url_for('member_events') }}">
+    <i class="fas fa-calendar"></i>
+    Events
+</a>
+
+               <a href="{{ url_for('member_news') }}">
+    <i class="fas fa-newspaper"></i>
+    News
+</a>
+
+                <a href="{{ url_for('member_projects') }}">
+    <i class="fas fa-lightbulb"></i>
+    Projects
+</a>
+
+                <a href="{{ url_for('home') }}">
+                    <i class="fas fa-globe"></i>
+                    Back to Website
+                </a>
+
+            </nav>
+
+            <a href="{{ url_for('member_logout') }}"
+   class="member-logout">
+    <i class="fas fa-right-from-bracket"></i>
+    Logout
+</a>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="member-main">
+
+            <div class="member-topbar">
+
+                <div>
+                    <h1>My Profile</h1>
+
+                    <p>
+                        View your CIY-26 membership information.
+                    </p>
+                </div>
+
+                <div class="member-user-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE CARD -->
+
+            <div class="profile-card">
+
+                <div class="profile-header">
+
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+
+                    <div>
+                        <h2>{{ member.name }}</h2>
+
+                        <span class="profile-status">
+                            <i class="fas fa-circle-check"></i>
+                            {{ member.status }}
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="profile-information">
+
+                    <div class="profile-item">
+
+                        <i class="fas fa-envelope"></i>
+
+                        <div>
+                            <span>Email Address</span>
+                            <strong>{{ member.email }}</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <i class="fas fa-phone"></i>
+
+                        <div>
+                            <span>Phone Number</span>
+                            <strong>{{ member.phone }}</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <i class="fas fa-lightbulb"></i>
+
+                        <div>
+                            <span>Area of Interest</span>
+                            <strong>{{ member.skill }}</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <i class="fas fa-calendar"></i>
+
+                        <div>
+                            <span>Application Date</span>
+
+                            <strong>
+                                {{ member.created_at.strftime('%d %B %Y') }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-item profile-full">
+
+                        <i class="fas fa-comment"></i>
+
+                        <div>
+                            <span>Why I Joined CIY-26</span>
+
+                            <strong>
+                                {{ member.message }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-actions">
+
+                    <a href="{{ url_for('member_dashboard') }}"
+                       class="profile-back-button">
+
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Dashboard
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

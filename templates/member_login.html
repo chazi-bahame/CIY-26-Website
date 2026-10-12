@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Member Login | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="member-login-page">
+
+        <div class="member-login-card">
+
+            <div class="member-login-icon">
+                <i class="fas fa-user"></i>
+            </div>
+
+            <h1>CIY-26 Member Login</h1>
+
+            <p class="member-login-subtitle">
+                Login to access your CIY-26 member area.
+            </p>
+
+            {% if error %}
+            <div class="login-error">
+                <i class="fas fa-circle-exclamation"></i>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <form method="POST">
+
+                <div class="member-form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="member-input-box">
+
+                        <i class="fas fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="member-form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="member-input-box">
+
+                        <i class="fas fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit"
+                        class="member-login-button">
+
+                    Login
+                    <i class="fas fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <div class="member-login-footer">
+
+                <p>
+                    Not a member yet?
+                    <a href="{{ url_for('home') }}#join">
+                        Join CIY-26
+                    </a>
+                </p>
+
+                <a href="{{ url_for('home') }}"
+                   class="back-home-link">
+
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Website
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

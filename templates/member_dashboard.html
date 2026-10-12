@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Member Dashboard | CIY-26</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="member-dashboard">
+
+        <!-- SIDEBAR -->
+
+        <aside class="member-sidebar">
+
+            <div class="member-brand">
+                <i class="fas fa-users"></i>
+                <span>CIY-26</span>
+            </div>
+
+            <nav>
+
+                <a href="#" class="active">
+                    <i class="fas fa-gauge-high"></i>
+                    Dashboard
+                </a>
+
+               <a href="{{ url_for('member_profile') }}">
+    <i class="fas fa-user"></i>
+    My Profile
+</a>
+
+                <a href="{{ url_for('member_application') }}">
+    <i class="fas fa-file-lines"></i>
+    My Application
+</a>
+
+                <a href="{{ url_for('member_announcements') }}">
+    <i class="fas fa-bullhorn"></i>
+    Announcements
+</a>
+
+                <a href="{{ url_for('member_events') }}">
+    <i class="fas fa-calendar"></i>
+    Events
+</a>
+
+                <a href="#">
+                    <i class="fas fa-newspaper"></i>
+                    News
+                </a>
+
+                <a href="{{ url_for('member_projects') }}">
+    <i class="fas fa-lightbulb"></i>
+    Projects
+</a>
+
+                <a href="{{ url_for('home') }}">
+                    <i class="fas fa-globe"></i>
+                    Back to Website
+                </a>
+
+            </nav>
+
+            <a href="/member/logout" class="member-logout">
+                <i class="fas fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="member-main">
+
+            <div class="member-topbar">
+
+                <div>
+                    <h1>Welcome, {{ member_name }} 👋</h1>
+
+                    <p>
+                        Welcome to your CIY-26 member dashboard.
+                    </p>
+                </div>
+
+                <div class="member-user-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+
+            </div>
+
+
+            <!-- STATUS CARD -->
+
+            <div class="member-welcome-card">
+
+                <div>
+                    <span>MEMBERSHIP STATUS</span>
+
+                    <h2>Active Member</h2>
+
+                    <p>
+                        Your CIY-26 membership application has been accepted.
+                    </p>
+                </div>
+
+                <i class="fas fa-circle-check"></i>
+
+            </div>
+
+
+            <!-- DASHBOARD CARDS -->
+
+            <div class="member-dashboard-grid">
+
+                <div class="member-dashboard-card">
+
+                    <i class="fas fa-user"></i>
+
+                    <h3>My Profile</h3>
+
+                    <p>
+                        View and manage your member information.
+                    </p>
+
+                    <a href="{{ url_for('member_profile') }}">
+    View Profile
+    <i class="fas fa-arrow-right"></i>
+</a>
+
+                </div>
+
+
+                <div class="member-dashboard-card">
+
+                    <i class="fas fa-bullhorn"></i>
+
+                    <h3>Announcements</h3>
+
+                    <p>
+                        Stay updated with important CIY-26 announcements.
+                    </p>
+
+                    <a href="{{ url_for('member_announcements') }}">
+    View Announcements
+    <i class="fas fa-arrow-right"></i>
+</a>
+
+                </div>
+
+
+                <div class="member-dashboard-card">
+
+                    <i class="fas fa-calendar-days"></i>
+
+                    <h3>Events</h3>
+
+                    <p>
+                        View upcoming CIY-26 events and activities.
+                    </p>
+
+                    <a href="#">
+                        View Events
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="member-dashboard-card">
+
+                    <i class="fas fa-lightbulb"></i>
+
+                    <h3>Projects</h3>
+
+                    <p>
+                        Explore projects and innovation activities.
+                    </p>
+
+                    <a href="#">
+                        Explore Projects
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
