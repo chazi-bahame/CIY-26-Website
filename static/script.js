@@ -1,293 +1,185 @@
 
-
-// Kusimamia menyu ya simu (Mobile Menu Toggle)
-const mobileMenu = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
-
-mobileMenu.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
-
-// Kuficha menyu kiotomatiki mtumiaji anapobofya link yoyote kwenye simu
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-    });
-});
-
-
-// Kuchukua vipengele muhimu
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const closeBtn = document.querySelector('.close');
-const galleryImages = document.querySelectorAll('.gallery-item img');
-
-// Mtumiaji akibonyeza picha yoyote
-galleryImages.forEach(img => {
-    img.addEventListener('click', () => {
-        lightbox.style.display = 'block';
-        lightboxImg.src = img.src;
-    });
-});
-
-// Kufunga picha kubwa ukibonyeza kitufe cha 'X'
-closeBtn.addEventListener('click', () => {
-    lightbox.style.display = 'none';
-});
-
-// Kufunga ukibonyeza nje kidogo ya picha
-lightbox.addEventListener('click', (e) => {
-    if (e.target !== lightboxImg) {
-        lightbox.style.display = 'none';
-    }
-});
-
-
-eventForm.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const title = 
-    document.getElementById("eventTitle").value;
-    const date = 
-    document.getElementById(eventDate).value;
-    const description = 
-    document.getElementById(eventDescription).value;
-    const imageFile = 
-    document.getElementById(eventImage).files[0];
-    if (!imageFile) {
-        alert("please select an event image.");
-        return;
-    }
-    const [events, setEvents] = 
-    useState([]);
-    const handleAddEvent = (e) =>{
-        e.preventDefault();
-        //kutengeneza object ya tukio jipya
-        const newEvent = {
-            title,
-            date,
-            description,
-            file
-        };
-        //kuongeza tukio kwenye orodha
-        setEvents([...events, newEvent]);
-        //kusafisha form baada ya kusubmit
-        SVGTextPositioningElement('');
-        SVGMetadataElement('');
-    };
-    
-    //convert image to data
-    const reader = 
-    new FileReader();
-    reader.onload = function() {
-        const newEvent = {
-            id:Date.now(),
-            title:title,
-            date:date,
-            description:description,
-            //picha ya event hii
-            Image:reader.result
-        };
-        const events = 
-        JSON.parse(localStorage.getItem("events")) || [];
-        //andika event mpya
-        events.push(newEvent);
-        //save events
-        localStorage.setItem(
-            "events", JSON.stringify(events)
-        );
-        //clear form
-        eventForm.reset();
-        //display events
-        loadEvents();
-        alert("Event added successifully!");
-    };
-    reader.readAsDataURL(imageFile);
-});
-function deleteEvent(index) {
-    const events = 
-    JSON.parse(localStorage.getItem("events")) || [];
-    events.splice(index, 1);
-    localStorage.setItem("event", JSON.stringify(events));
-    loadEvents();
-}
-// ============================
-// START
-// ============================
-loadEvents();
-
-const mobileMenu = document.getElementById("mobile-menu");
-const navigation = document.querySelector(".main-navigation nav");
-
-if (mobileMenu) {
-mobileMenu.addEventListener("click", function () {
-navigation.classList.toggle("active");
-});
-}
-
-// ================= JOIN FORM =================
-
-const joinForm = document.getElementById("joinForm");
-const joinSuccess = document.getElementById("joinSuccess");
-
-if (joinForm) {
-
-    joinForm.addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        joinSuccess.textContent =
-            "Your application has been received successfully. The CIY-26 team will contact you through your email.";
-
-        joinForm.reset();
-
-    });
-
-}
-// ================= CONTACT FORM =================
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    const contactForm = document.getElementById("contactForm");
+    // ================= MOBILE MENU =================
+    const menuButton = document.getElementById("mobile-menu");
+    const navLinks = document.querySelector(".nav-links");
 
-    if (contactForm) {
+    if (menuButton && navLinks) {
+        menuButton.addEventListener("click", function () {
+            navLinks.classList.toggle("active");
 
-        contactForm.addEventListener("submit", function (event) {
-
-            // Allow the form to be submitted to Flask
-            // Do not use event.preventDefault() here
-
+            const isOpen = navLinks.classList.contains("active");
+            menuButton.setAttribute("aria-expanded", String(isOpen));
         });
 
+        navLinks.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                navLinks.classList.remove("active");
+                menuButton.setAttribute("aria-expanded", "false");
+            });
+        });
     }
 
-});
-// ================= BACK TO TOP =================
+    // ================= GALLERY LIGHTBOX =================
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector(".close");
+    const galleryImages = document.querySelectorAll(".gallery-item img");
 
-const backToTop = document.getElementById("backToTop");
+    if (lightbox && lightboxImg) {
+        galleryImages.forEach(function (img) {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "block";
+                lightboxImg.src = img.src;
+            });
+        });
 
-if (backToTop) {
-
-    window.addEventListener("scroll", function () {
-
-        if (window.scrollY > 400) {
-            backToTop.classList.add("show");
-        } else {
-            backToTop.classList.remove("show");
+        if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+                lightbox.style.display = "none";
+            });
         }
 
-    });
-
-
-    backToTop.addEventListener("click", function () {
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        lightbox.addEventListener("click", function (event) {
+            if (event.target !== lightboxImg) {
+                lightbox.style.display = "none";
+            }
         });
+    }
 
-    });
+    // ================= EVENTS =================
+    const eventForm = document.getElementById("eventForm");
 
-}
-// ================= LOGIN =================
+    if (eventForm) {
+        eventForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-document.addEventListener("DOMContentLoaded", function () {
+            const title = document.getElementById("eventTitle")?.value.trim();
+            const date = document.getElementById("eventDate")?.value;
+            const description =
+                document.getElementById("eventDescription")?.value.trim();
+            const imageInput = document.getElementById("eventImage");
+            const imageFile = imageInput?.files[0];
 
-    const loginButton = document.getElementById("loginButton");
-    const loginMessage = document.getElementById("loginMessage");
-
-    if (loginButton) {
-
-        loginButton.addEventListener("click", function () {
-
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
-
-            if (email === "" || password === "") {
-
-                loginMessage.textContent =
-                    "Please enter your email and password.";
-
-                loginMessage.style.color = "#dc3545";
-
+            if (!title || !date || !description) {
+                alert("Please fill in all event details.");
                 return;
             }
 
-            loginMessage.textContent =
-                "Login interface is working. Real authentication will be added with Flask.";
+            if (!imageFile) {
+                alert("Please select an event image.");
+                return;
+            }
 
-            loginMessage.style.color = "#00a6c7";
+            const reader = new FileReader();
 
+            reader.onload = function () {
+                try {
+                    const events = JSON.parse(
+                        localStorage.getItem("events") || "[]"
+                    );
+
+                    events.push({
+                        id: Date.now(),
+                        title: title,
+                        date: date,
+                        description: description,
+                        Image: reader.result
+                    });
+
+                    localStorage.setItem("events", JSON.stringify(events));
+                    eventForm.reset();
+
+                    if (typeof window.loadEvents === "function") {
+                        window.loadEvents();
+                    }
+
+                    alert("Event added successfully!");
+                } catch (error) {
+                    console.error("Could not save event:", error);
+                    alert("Could not save the event. Please try again.");
+                }
+            };
+
+            reader.onerror = function () {
+                alert("Could not read the selected image.");
+            };
+
+            reader.readAsDataURL(imageFile);
         });
-
     }
 
-});
-// ================= MEMBER REGISTRATION =================
-
-document.addEventListener("DOMContentLoaded", function () {
-
+    // ================= JOIN / MEMBER FORM =================
     const joinForm = document.getElementById("joinForm");
     const joinSuccess = document.getElementById("joinSuccess");
 
     if (joinForm) {
-
         joinForm.addEventListener("submit", function (event) {
+            const passwordInput = document.getElementById("joinPassword");
+            const confirmPasswordInput =
+                document.getElementById("confirmPassword");
 
-            event.preventDefault();
+            if (passwordInput && confirmPasswordInput) {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    event.preventDefault();
 
-            const password =
-                document.getElementById("joinPassword").value;
+                    if (joinSuccess) {
+                        joinSuccess.textContent = "Passwords do not match.";
+                        joinSuccess.style.color = "#dc3545";
+                    }
+                    return;
+                }
+            }
 
-            const confirmPassword =
-                document.getElementById("confirmPassword").value;
+            // Keep the existing Flask submission behavior.
+            // Do not prevent the form from submitting when valid.
+        });
+    }
 
+    // ================= LOGIN =================
+    const loginButton = document.getElementById("loginButton");
+    const loginMessage = document.getElementById("loginMessage");
 
-            if (password !== confirmPassword) {
+    if (loginButton && loginMessage) {
+        loginButton.addEventListener("click", function () {
+            const emailInput = document.getElementById("loginEmail");
+            const passwordInput = document.getElementById("loginPassword");
 
-                joinSuccess.textContent =
-                    "Passwords do not match.";
+            const email = emailInput ? emailInput.value.trim() : "";
+            const password = passwordInput ? passwordInput.value : "";
 
-                joinSuccess.style.color = "#dc3545";
-
+            if (!email || !password) {
+                loginMessage.textContent =
+                    "Please enter your email and password.";
+                loginMessage.style.color = "#dc3545";
                 return;
             }
 
-
-            joinSuccess.textContent =
-                "Your CIY-26 account information has been received successfully.";
-
-            joinSuccess.style.color = "#00875a";
-
-            joinForm.reset();
-
+            loginMessage.textContent =
+                "Login interface is working. Real authentication must be handled by Flask.";
+            loginMessage.style.color = "#00a6c7";
         });
-
     }
 
-});
+    // ================= BACK TO TOP =================
+    const backToTop = document.getElementById("backToTop");
 
+    if (backToTop) {
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 400) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const menuButton = document.getElementById("mobile-menu");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (!menuButton || !navLinks) {
-        console.log("Mobile menu elements not found");
-        return;
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
     }
 
-    menuButton.addEventListener("click", function () {
-        navLinks.classList.toggle("active");
-
-        console.log(
-            "Menu active:",
-            navLinks.classList.contains("active")
-        );
-    });
-
-    navLinks.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () {
-            navLinks.classList.remove("active");
-        });
-    });
 });

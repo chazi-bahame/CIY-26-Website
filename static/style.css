@@ -357,7 +357,12 @@ section {
     .nav-links.active {
         max-height: 250px;
         padding: 20px 0;
-    }
+    display: flex !important;
+    flex-direction: column;
+    visibility: visible;
+    opacity: 1;
+}
+    
     .about-content {
         grid-template-columns: 1fr;
     }
