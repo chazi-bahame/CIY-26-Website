@@ -265,3 +265,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.getElementById("mobile-menu");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (!menuButton || !navLinks) {
+        console.log("Mobile menu elements not found");
+        return;
+    }
+
+    menuButton.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+
+        console.log(
+            "Menu active:",
+            navLinks.classList.contains("active")
+        );
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            navLinks.classList.remove("active");
+        });
+    });
+});
