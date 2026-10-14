@@ -938,33 +938,12 @@ def contact():
     finally:
         db.close()
 
-    # SEND EMAIL NOTIFICATION
-    try:
-        msg = Message(
-            subject=f"CIY-26 Contact: {subject}",
-            sender=app.config["MAIL_USERNAME"],
-            recipients=[app.config["MAIL_USERNAME"]],
-            body=f"""
-New message received from CIY-26 website.
-
-Name: {name}
-Email: {email}
-Subject: {subject}
-
-Message:
-{message}
-"""
-        )
-
-        mail.send(msg)
-
-    except Exception:
-        app.logger.exception(
-            "Email notification failed; contact message is already saved"
-        )
+        # Email notification temporarily disabled
+    app.logger.warning(
+        "Contact message saved; email notification disabled."
+    )
 
     return render_template("message_sent.html")
-
 
 @app.route("/join", methods=["POST"])
 def join_application():
