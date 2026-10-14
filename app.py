@@ -17,7 +17,7 @@ app.config["MAIL_PORT"] = int(os.getenv("MAIL_PORT", 587))
 app.config["MAIL_USE_TLS"] = os.getenv("MAIL_USE_TLS") == "True"
 app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
 app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-
+app.config["MAIL_TIMEOUT"] = 10
 mail = Mail(app)
 
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
@@ -907,6 +907,7 @@ def edit_project(project_id):
 
     return render_template("edit_project.html", project=project)
 
+
 @app.route("/contact", methods=["POST"])
 def contact():
     from database import SessionLocal
@@ -918,16 +919,24 @@ def contact():
 
     db = SessionLocal()
 
-    contact_message = ContactMessage(
-        name=name,
-        email=email,
-        subject=subject,
-        message=message
-    )
+    try:
+        contact_message = ContactMessage(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
 
-    db.add(contact_message)
-    db.commit()
-    db.close()
+        db.add(contact_message)
+        db.commit()
+
+    except Exception:
+        db.rollback()
+        app.logger.exception("Failed to save contact message")
+        return "Imeshindikana kuhifadhi ujumbe. Tafadhali jaribu tena.", 500
+
+    finally:
+        db.close()
 
     # SEND EMAIL NOTIFICATION
     try:
@@ -949,10 +958,13 @@ Message:
 
         mail.send(msg)
 
-    except Exception as e:
-        print("EMAIL ERROR:", e)
+    except Exception:
+        app.logger.exception(
+            "Email notification failed; contact message is already saved"
+        )
 
     return render_template("message_sent.html")
+
 
 @app.route("/join", methods=["POST"])
 def join_application():
