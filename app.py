@@ -7,6 +7,7 @@ from models import Project, ContactMessage, Gallery, Announcement, TeamMember, N
 from database import engine, Base
 from models import Project
 from werkzeug.security import generate_password_hash
+import requests
 
 load_dotenv()
 
@@ -908,14 +909,15 @@ def edit_project(project_id):
     return render_template("edit_project.html", project=project)
 
 
+
 @app.route("/contact", methods=["POST"])
 def contact():
     from database import SessionLocal
 
-    name = request.form.get("name")
-    email = request.form.get("email")
-    subject = request.form.get("subject")
-    message = request.form.get("message")
+    name = request.form.get("name", "").strip()
+    email = request.form.get("email", "").strip()
+    subject = request.form.get("subject", "").strip()
+    message = request.form.get("message", "").strip()
 
     db = SessionLocal()
 
@@ -938,12 +940,69 @@ def contact():
     finally:
         db.close()
 
-        # Email notification temporarily disabled
-    app.logger.warning(
-        "Contact message saved; email notification disabled."
-    )
+    # Send notification using Brevo API
+    api_key = os.getenv("BREVO_API_KEY")
+    sender_email = os.getenv("BREVO_SENDER_EMAIL")
+    receiver_email = os.getenv("CONTACT_RECEIVER_EMAIL")
+
+    if not api_key or not sender_email or not receiver_email:
+        app.logger.error(
+            "Brevo configuration is incomplete."
+        )
+        return render_template("message_sent.html")
+
+    payload = {
+        "sender": {
+            "name": "CIY-26 Website",
+            "email": sender_email
+        },
+        "to": [
+            {"email": receiver_email}
+        ],
+        "replyTo": {
+            "email": email,
+            "name": name
+        } if email else {"email": sender_email},
+        "subject": f"CIY-26 Contact: {subject}",
+        "textContent": (
+            "New message received from CIY-26 website.\n\n"
+            f"Name: {name}\n"
+            f"Email: {email}\n"
+            f"Subject: {subject}\n\n"
+            f"Message:\n{message}"
+        )
+    }
+
+    try:
+        response = requests.post(
+            "https://api.brevo.com/v3/smtp/email",
+            headers={
+                "accept": "application/json",
+                "api-key": api_key,
+                "content-type": "application/json"
+            },
+            json=payload,
+            timeout=10
+        )
+
+        if response.status_code not in (200, 201, 202):
+            app.logger.error(
+                "Brevo email failed: status=%s response=%s",
+                response.status_code,
+                response.text[:500]
+            )
+        else:
+            app.logger.info(
+                "Brevo accepted contact notification."
+            )
+
+    except requests.RequestException:
+        app.logger.exception(
+            "Brevo API request failed; message remains saved."
+        )
 
     return render_template("message_sent.html")
+
 
 @app.route("/join", methods=["POST"])
 def join_application():
