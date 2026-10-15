@@ -5527,7 +5527,8 @@ footer {
 
 }
 
-/* Mobile Navigation Fix */
+
+/* Mobile navigation fix */
 @media screen and (max-width: 768px) {
     .nav-container {
         position: relative;
@@ -5537,43 +5538,69 @@ footer {
     }
 
     .menu-toggle {
-        display: block;
-        background: transparent;
-        border: none;
-        padding: 10px;
-        z-index: 1001;
+        display: block !important;
+        position: relative;
+        z-index: 10010;
+        cursor: pointer;
     }
 
     .nav-container nav {
         position: absolute;
         top: 100%;
         left: 0;
+        right: 0;
         width: 100%;
-        z-index: 1000;
+        z-index: 10000;
+        background: var(--bg-color, #fff);
+    }
+
+    .nav-container nav .nav-links {
+        display: none !important;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background: var(--bg-color, #fff);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-container nav .nav-links.active {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .nav-container nav .nav-links li {
+        display: block;
+        width: 100%;
+    }
+
+    .nav-container nav .nav-links a {
+        display: block;
+        padding: 14px 20px;
+        color: var(--text-color, #222);
+        text-decoration: none;
+    }
+}
+
+/* Mobile navigation menu */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
     }
 
     .nav-links {
         display: none;
         flex-direction: column;
-        gap: 0;
         width: 100%;
-        padding: 10px 0;
-        margin: 0;
-        background: var(--bg-color, #ffffff);
-        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
     }
 
     .nav-links.active {
         display: flex;
-    }
-
-    .nav-links li {
-        width: 100%;
-    }
-
-    .nav-links a {
-        display: block;
-        padding: 12px 20px;
     }
 }
 
