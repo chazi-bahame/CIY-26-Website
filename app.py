@@ -940,15 +940,23 @@ def contact():
     finally:
         db.close()
 
+  
     # Send notification using Brevo API
+    app.logger.info("CONTACT: Starting Brevo notification")
+
     api_key = os.getenv("BREVO_API_KEY")
     sender_email = os.getenv("BREVO_SENDER_EMAIL")
     receiver_email = os.getenv("CONTACT_RECEIVER_EMAIL")
 
+    app.logger.info(
+        "CONTACT: Brevo config present: api_key=%s, sender=%s, receiver=%s",
+        bool(api_key),
+        bool(sender_email),
+        bool(receiver_email)
+    )
+
     if not api_key or not sender_email or not receiver_email:
-        app.logger.error(
-            "Brevo configuration is incomplete."
-        )
+        app.logger.error("Brevo configuration is incomplete.")
         return render_template("message_sent.html")
 
     payload = {
@@ -972,6 +980,7 @@ def contact():
             f"Message:\n{message}"
         )
     }
+
 
     try:
         response = requests.post(
